@@ -1,0 +1,12 @@
+#############################################################################
+Welcome to the NWU RHCS Archival Cluster. Unauthorized access is prohibited.#
+#############################################################################
+
+Hostname:             {{ ansible_facts['fqdn'] }}
+System OS:            {{ ansible_facts['distribution'] }} Enterprise Linux {{ ansible_facts['distribution_version'] }}
+Server Model:         {{ ansible_facts['system_vendor'] }}
+Server Model Number:  {{ ansible_facts['product_name'] }}
+Server Serial Number: {{ ansible_facts['product_serial'] }}
+
+
+

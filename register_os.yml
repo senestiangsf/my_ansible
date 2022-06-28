@@ -1,0 +1,17 @@
+---
+- name: Register and subscribe RHEL systems
+  hosts: all
+  vars_files:
+        - subscription_password.yml
+  tasks:
+        - name: Unregister system
+          redhat_subscription:
+                   state: absent
+
+        - name: register and subscribe systems
+          redhat_subscription:
+                   username: "{{ username }}"
+                   password: "{{ password }}"
+                   auto_attach: true
+                   release: '8.3'
+                   state: present

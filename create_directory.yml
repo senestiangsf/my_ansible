@@ -1,0 +1,22 @@
+---
+- name: Create RHCS_OnM directory on all osds
+  hosts: osds
+  tasks:
+        - name: Create /home/ceph-arcadmin/RHCS_OnM_Scripts
+          file:
+              path: /home/ceph-arcadmin/RHCS_OnM_Scripts
+              state: directory
+              owner: ceph-arcadmin
+              group: ceph-arcadmin
+
+        - name: Copy files from files/ directory to RHCS_OnM_Scripts directory
+          copy:
+              src: "{{ item }}"
+              dest: /home/ceph-arcadmin/RHCS_OnM_Scripts
+              mode: o+x
+              owner: root
+              group: root
+          loop:
+              - files/RUN_ledmon.sh
+              - files/SCAN_Disk-per-slot.sh   
+              - files/lvm_process.sh 

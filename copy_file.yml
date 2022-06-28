@@ -1,0 +1,23 @@
+---
+- name: Make backup of /etc/snmp/snmpd.conf file
+  hosts: all
+  tasks:
+        - name: move snmp file 
+          shell: mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.back
+          ignore_errors: true
+
+        - name: Copy snmpd file to /etc/snmp/snmpd.conf
+          copy:
+              src: /etc/snmp/snmpd.conf
+              dest: /etc/snmp/snmpd.conf
+              mode: 0644
+              owner: root
+              group: root
+          notify: restart_snmpd_file
+ 
+  handlers:
+        - name: restart_snmpd_file
+          service:
+              name: snmpd
+              enabled: true
+              state: restarted

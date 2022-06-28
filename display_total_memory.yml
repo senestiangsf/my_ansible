@@ -1,0 +1,11 @@
+--- 
+- name: Display Total Memory Count of OSD Nodes
+  hosts: osds
+  tasks:
+        - name: Gather Facts
+          setup: 
+          register: output          
+
+        - name: Display total memory (MB)
+          debug:
+               var: output.ansible_facts.ansible_memtotal_mb

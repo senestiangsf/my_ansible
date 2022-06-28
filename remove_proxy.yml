@@ -1,0 +1,6 @@
+---
+- name: Remove proxy settings in /etc/environment
+  hosts: all
+  tasks:
+        - name: remove lines in /etc/environment
+          shell: cat /dev/null > /etc/environment

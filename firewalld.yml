@@ -1,0 +1,21 @@
+---
+- name: Configure Firewall Service
+  hosts: all
+  tasks:
+        - name: add snmp service to firewall
+          firewalld:
+              service: snmp
+              immediate: true
+              permanent: true
+              state: enabled
+          notify: restart_firewall
+  
+  handlers:
+        - name: restart_firewall
+          service:
+              name: firewalld
+              state: restarted
+              enabled: true
+     
+        
+       

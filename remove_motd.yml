@@ -1,0 +1,7 @@
+---
+- name: Remove MOTD banner
+  hosts: osds
+  tasks:
+        - name: remove /etc/motd banner
+          shell: cat /dev/null > /etc/motd
+

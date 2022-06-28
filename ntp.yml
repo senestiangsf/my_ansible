@@ -1,0 +1,25 @@
+---
+- name: Configure NTP Service
+  hosts: iscsigws
+  tasks:
+        - name: Edit /etc/chrony.conf file
+          lineinfile:
+              path: /etc/chrony.conf
+              regexp: '^pool'
+              line: | 
+                    server 143.160.58.6 iburst  
+                    server 143.160.58.4 iburst
+              owner: root
+              mode: 0644
+              group: root
+          notify: restart_ntp_service
+ 
+  handlers:
+        - name: restart_ntp_service
+          service:
+              name: chronyd
+              state: restarted
+              enabled: true
+  
+ 
+ 

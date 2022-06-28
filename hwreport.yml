@@ -1,0 +1,20 @@
+---
+- name: Hardware Reportfor  RHCS Archival Cluster
+  hosts: all 
+  tasks:
+        - name: Display hardware stats
+          template:
+              src: templates/hardware_report.j2
+              dest: /tmp/hwreport.txt
+              mode: 0644
+              group: root
+              owner: root
+          register: output
+       
+        - name: Capture results
+          shell: cat /tmp/hwreport.txt
+          register: results
+          
+        - name: Display results  
+          debug: 
+              var: results.stdout_lines

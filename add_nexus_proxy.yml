@@ -1,0 +1,12 @@
+---
+- name: Add http and https proxy settings to /etc/environment
+  hosts: all 
+  tasks:
+        - name: Add proxy config to /etc/environment
+          blockinfile:
+              path: /etc/environment
+              state: present
+              block: |
+                   no_proxy="localhost,127.0.0.1,143.160.0.0/16,v-rhcs-arc-admin,redhatregistry.nwu.ac.za"
+                   http_proxy="http://143.160.36.154:80"
+                   https_proxy="http://143.160.36.154:80"

@@ -1,0 +1,15 @@
+---
+- name: Install {{ package }} package
+  hosts: all
+  tasks:
+        - name: Install {{ package }} package
+          dnf:
+             name: "{{ package }}"
+             state: latest
+
+  
+        - name: start and enable {{ service }}
+          service:
+             name: "{{ service }}"
+             state: started
+             enabled: true  

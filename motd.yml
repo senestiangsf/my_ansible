@@ -1,0 +1,11 @@
+---
+- name: Motd play for RHCS Archival Cluster
+  hosts: osds 
+  tasks:
+        - name: Configure motd banner
+          template:
+              src: templates/motd.j2
+              dest: /etc/motd
+              mode: 0644
+              owner: root
+              group: root 

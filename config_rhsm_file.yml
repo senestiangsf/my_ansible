@@ -1,0 +1,17 @@
+---
+- name: Config /etc/rhsm/rhsm.config file
+  hosts: all
+  tasks:
+        - name: Add proxy ip address to /etc/rhsm/rhsm.conf
+          lineinfile:
+                regexp: '^proxy_hostname'
+                path: /etc/rhsm/rhsm.conf
+                line: 'proxy_hostname = '
+                state: present
+               
+        - name: Add proxy port to /etc/rhsm/rhsm.conf
+          lineinfile:
+                regexp: '^proxy_port'
+                path: /etc/rhsm/rhsm.conf
+                line: 'proxy_port ='
+                state: present

@@ -1,0 +1,6 @@
+---
+package: 
+       - sosreport
+       - redhat-support-tool
+
+service: keepalived

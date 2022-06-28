@@ -1,0 +1,23 @@
+---
+- name: Config /etc/ssh/sshd_config file
+  hosts: all
+  tasks:
+        - name: Disable root ssh login
+          lineinfile:
+               path: /etc/ssh/sshd_config
+               regexp: '^PermitRootLogin'
+               line: 'PermitRootLogin no'
+               state: present
+
+        - name: Disable Password authentication
+          lineinfile:
+               path: /etc/ssh/sshd_config
+               regexp: '^PasswordAuthentication'
+               line: 'PasswordAuthentication no'
+               state: present
+        
+        - name: Restart sshd service
+          service:
+               name: sshd
+               state: restarted
+               enabled: true

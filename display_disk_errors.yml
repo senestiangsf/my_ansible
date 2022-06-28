@@ -1,0 +1,13 @@
+---
+- name: Display HDD disk errors
+  hosts: osds
+  serial: 1
+  ignore_errors: true
+  tasks:
+        - name: display hard drive errors using smartctl
+          shell: for disk in sd{a..z} sda{a..g}; do sudo smartctl --quietmode=errorsonly --all /dev/${disk}; done
+          register: disk_output
+
+        - name: Display output
+          debug:
+               var: disk_output.stdout

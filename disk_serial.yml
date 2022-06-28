@@ -1,0 +1,15 @@
+---
+- name: Display disk serials
+  hosts: osds
+  gather_facts: true
+  tasks:
+        - name: Get disk serial numbers for OSDS
+          setup: 
+          register: disk_info
+
+        - name: Get disk info
+          debug:
+              var: disk_info.ansible_facts.ansible_devices
+
+               
+               

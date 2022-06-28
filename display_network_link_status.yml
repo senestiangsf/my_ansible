@@ -1,0 +1,14 @@
+---
+- name: Check If All Network Interfaces are up
+  hosts: osds
+  tasks: 
+        - name: Display network interfaces
+          shell: ip add | grep UP && nmcli device status 
+          register: device_links_status
+       
+        - name: Display output
+          debug:
+              var: device_links_status.stdout_lines
+
+
+

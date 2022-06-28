@@ -1,0 +1,24 @@
+---
+- name: Display Error messages on iscsi gateways
+  hosts: iscsigws
+  serial: 1
+  tasks:
+        - name: Display error messages in /var/log
+          shell: cat /var/log/tcmu-runner/tcmu-runner.log | grep ERROR
+          register: output
+          ignore_errors: true
+
+        - name: Display output
+          debug:
+              var: output.stdout_lines
+
+        - name: Check dmesg to see if server went into d state
+          shell: dmesg -c ; echo w > /proc/sysrq-trigger ; dmesg -c > /tmp/waiting-tasks.txt
+
+        - name: View /tmp/waiting-tasks.txt
+          shell: cat /tmp/waiting-tasks.txt
+          register: state
+
+        - name: Display /tmp/waiting-tasks.txt
+          debug:
+              var: state.stdout_lines

@@ -1,0 +1,14 @@
+---
+- name: Generate /etc/hosts file
+  hosts: all
+  gather_facts: true
+  tasks:
+        - name: Create /etc/hosts file
+          template:
+              src: templates/hosts_file.j2
+              dest: /etc/hosts
+              owner: root
+              group: root
+              mode: 0644
+          
+          

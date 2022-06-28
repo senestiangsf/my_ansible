@@ -1,0 +1,6 @@
+---
+- name: Format disks on OSDS
+  hosts: osds
+  tasks:
+        - name: Wipe disks
+          shell: for disk in nvme{0..4}n1 sd{a..z} sda{a..i}; do wipefs -a /dev/${disk}; done

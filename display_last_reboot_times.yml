@@ -1,0 +1,12 @@
+---
+- name: Check Last Reboot Time on OSDS
+  hosts: osds
+  tasks:
+        - name: Determine last reboot time
+          shell: last reboot
+          register: output
+
+
+        - name: Display output
+          debug:
+              var: output.stdout
