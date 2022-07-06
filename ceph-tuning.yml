@@ -1,0 +1,13 @@
+---
+- name: Tune CEPH OSD Servers
+  hosts: osds
+  tasks:
+        - name: Adjust sysctl tunables on all OSD servers
+          sysctl:
+              name: "{{ item.name }}"
+              value: "{{ item.value }}"
+              state: present
+              reload: true
+              sysctl_file: /etc/sysctl.d/ceph-tuning.conf
+          loop: "{{ osd_sysctl_tunables }}"
+
