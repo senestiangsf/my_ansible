@@ -1,0 +1,11 @@
+---
+- name: Config ceph config 
+  hosts: osds 
+  tasks:
+        - name: Remove lines in /etc/ceph/ceph.conf config file
+          lineinfile:
+              path: /etc/ceph/ceph.conf
+              regexp: "^osd scrub"
+              state: absent
+                    
+
