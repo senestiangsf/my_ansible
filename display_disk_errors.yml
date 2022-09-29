@@ -1,6 +1,8 @@
 ---
 - name: Display HDD disk errors
   hosts: osds
+  serial: 1
+  gather_facts: false
   ignore_errors: true
   tasks:
         - name: display hard drive errors using smartctl
